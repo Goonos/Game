@@ -2,45 +2,21 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2단계 미션</title>
-    <style>
-        body { font-family: 'Malgun Gothic', sans-serif; text-align: center; background-color: #f4f4f9; margin: 0; padding: 50px 20px; }
-        .container { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h2 { color: #333; }
-        .hidden { display: none; }
-        button { padding: 12px 20px; font-size: 16px; font-weight: bold; margin: 10px; cursor: pointer; border: none; border-radius: 8px; transition: 0.2s; }
-        .btn-draw { background-color: #008CBA; color: white; font-size: 18px; padding: 15px 30px; }
-        .btn-draw:hover { background-color: #007399; }
-        .btn-back { background-color: #f44336; color: white; }
-        .btn-back:hover { background-color: #da190b; }
-        #result-box { margin-top: 30px; padding: 20px; background-color: #ffffe0; border-radius: 10px; border: 2px dashed #f39c12; min-height: 50px; }
-        #result-text { font-size: 22px; font-weight: bold; color: #d35400; }
-    </style>
+    <style>body { text-align: center; padding: 50px; } button { padding: 20px; font-size: 20px; }</style>
 </head>
 <body>
-    <div class="container">
-        <h2>2단계 미션</h2>
-        <button class="btn-draw" onclick="drawMission()">2단계 동작 뽑기</button>
-        
-        <div id="result-box" class="hidden">
-            <span id="result-text"></span>
-        </div>
-
-        <br><br>
-        <button class="btn-back" onclick="location.href='index.html'">난이도 다시 선택</button>
-    </div>
-
+    <h1>2단계: 사물 + 동작</h1>
+    <button onclick="draw()">미션 뽑기</button>
+    <h2 id="res" style="color: blue; margin-top: 30px;"></h2>
+    <br><a href="index.html">돌아가기</a>
     <script>
-        const objects = ["볼펜을", "지우개를", "전공 서적을", "스마트폰을", "텀블러를", "필통을"];
-        const verbs = ["머리 위에 5초간 올리기", "손가락으로 돌리기", "책상에 가볍게 두드리기", "아련한 눈빛으로 쳐다보기", "소중하게 쓰다듬기"];
-
-        function drawMission() {
-            const randomObj = objects[Math.floor(Math.random() * objects.length)];
-            const randomVerb = verbs[Math.floor(Math.random() * verbs.length)];
-            
-            document.getElementById('result-box').classList.remove('hidden');
-            document.getElementById('result-text').innerText = `${randomObj} ${randomVerb}`;
+        const objs = ["볼펜", "지우개", "책", "텀블러"];
+        const verbs = ["머리 위에 올리기", "손가락으로 돌리기", "쓰다듬기"];
+        function draw() {
+            const o = objs[Math.floor(Math.random()*objs.length)];
+            const v = verbs[Math.floor(Math.random()*verbs.length)];
+            document.getElementById('res').innerText = `${o}을(를) ${v}`;
         }
     </script>
 </body>
