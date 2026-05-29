@@ -2,24 +2,19 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>강의실 비밀 미션 게임</title>
+    <title>강의실 미션 게임</title>
     <style>
-        body { font-family: 'Malgun Gothic', sans-serif; text-align: center; background-color: #f4f4f9; margin: 0; padding: 50px 20px; }
-        .container { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h1 { color: #333; }
-        button { padding: 15px 20px; font-size: 16px; font-weight: bold; margin: 10px; cursor: pointer; border: none; border-radius: 8px; transition: 0.2s; }
-        .btn-level { background-color: #4CAF50; color: white; width: 80%; }
-        .btn-level:hover { background-color: #45a049; }
+        body { font-family: sans-serif; text-align: center; padding: 50px; background: #f0f0f0; }
+        .menu { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        a { text-decoration: none; background: #4CAF50; color: white; padding: 20px 40px; border-radius: 10px; width: 200px; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🤫 강의실 비밀 미션</h1>
-        <p>지금 강의실인가요? 원하는 난이도를 선택하세요!</p>
-        <button class="btn-level" onclick="location.href='level1.html'">1단계 (단순 행동)</button><br>
-        <button class="btn-level" onclick="location.href='level2.html'">2단계 (사물 활용)</button><br>
-        <button class="btn-level" onclick="location.href='level3.html'">3단계 (대상 지정)</button>
+    <h1>🤫 난이도를 선택하세요</h1>
+    <div class="menu">
+        <a href="level1.html">1단계 (단순 동작)</a>
+        <a href="level2.html">2단계 (사물 활용)</a>
+        <a href="level3.html">3단계 (대상 지정)</a>
     </div>
 </body>
 </html>
