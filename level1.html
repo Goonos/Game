@@ -31,83 +31,69 @@
             overflow: hidden;
         }
 
+        .bgm-btn {
+            position: absolute; top: 20px; right: 20px;
+            background: #fff; border: 4px solid #000;
+            padding: 10px; font-family: 'Press Start 2P', cursive; font-size: 10px;
+            cursor: pointer; box-shadow: 4px 4px 0px #000; z-index: 20;
+        }
+        .bgm-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; }
+
         .cheerleader {
-            position: absolute;
-            bottom: 30%;
-            width: 40px;
-            height: 60px;
-            background: #f0d5b1;
-            border: 4px solid #000;
-            image-rendering: pixelated;
+            position: absolute; bottom: 30%; width: 40px; height: 60px;
+            background: #f0d5b1; border: 4px solid #000; image-rendering: pixelated;
         }
         .cheerleader::after {
-            content: '';
-            position: absolute;
-            top: 20px; left: -4px;
-            width: 40px; height: 30px;
-            background: var(--pixel-red);
-            border: 4px solid #000;
+            content: ''; position: absolute; top: 20px; left: -4px;
+            width: 40px; height: 30px; background: var(--pixel-red); border: 4px solid #000;
         }
         .pompom {
-            position: absolute;
-            top: -20px;
-            width: 20px; height: 20px;
-            background: var(--pixel-yellow);
-            border: 4px solid #000;
+            position: absolute; top: -20px; width: 20px; height: 20px;
+            background: var(--pixel-yellow); border: 4px solid #000;
             animation: shake 0.5s infinite alternate;
         }
-        .pompom.left { left: -25px; }
-        .pompom.right { right: -25px; animation-delay: 0.2s; }
-        @keyframes shake {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
-        .pos-left { left: 10%; }
-        .pos-right { right: 10%; transform: scaleX(-1); }
+        .pompom.left { left: -25px; } .pompom.right { right: -25px; animation-delay: 0.2s; }
+        @keyframes shake { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+        .pos-left { left: 10%; } .pos-right { right: 10%; transform: scaleX(-1); }
 
         .game-container {
-            margin-top: 50px;
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border: 4px solid #000;
-            box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
-            width: 80%;
-            max-width: 600px;
+            margin-top: 50px; z-index: 10; background: rgba(255, 255, 255, 0.9);
+            padding: 30px; border: 4px solid #000; box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+            width: 80%; max-width: 600px;
         }
 
         h1 { font-size: 18px; margin-bottom: 10px; color: var(--pixel-blue); }
         p.desc { font-size: 8px; color: #555; margin-bottom: 30px; line-height: 1.5; }
 
         button {
-            padding: 15px 20px;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 10px;
-            margin: 10px;
-            cursor: pointer;
-            border: 4px solid #000;
-            transition: all 0.1s;
+            padding: 15px 20px; font-family: 'Press Start 2P', cursive;
+            font-size: 10px; margin: 10px; cursor: pointer;
+            border: 4px solid #000; transition: all 0.1s;
         }
 
         .btn-draw { background-color: var(--pixel-blue); color: white; box-shadow: 4px 4px 0px #000; }
         .btn-success { background-color: var(--pixel-green); color: white; box-shadow: 4px 4px 0px #000; }
-        .btn-success:disabled { background-color: #ccc; box-shadow: 2px 2px 0px #000; cursor: not-allowed; color: #888; }
+        .btn-toggle { background-color: #333; color: white; box-shadow: 4px 4px 0px #000; margin-top: 20px;}
+        button:disabled { background-color: #ccc; box-shadow: 2px 2px 0px #000; cursor: not-allowed; color: #888; }
         button:active:not(:disabled) { transform: translate(4px, 4px); box-shadow: 0px 0px 0px #000; }
 
         #timer { font-size: 30px; margin: 30px 0; color: #000; text-shadow: 2px 2px 0px #fff; }
-        #res { margin-top: 20px; font-size: 14px; min-height: 40px; line-height: 1.5; word-break: keep-all; font-family: 'Malgun Gothic', sans-serif; font-weight: bold; }
+        
+        #res { 
+            margin-top: 10px; font-size: 16px; min-height: 40px; line-height: 1.5; 
+            word-break: keep-all; font-family: 'Malgun Gothic', sans-serif; font-weight: bold; 
+            transition: opacity 0.2s; /* 가리기 애니메이션 */
+        }
+        
         .btn-back { display: inline-block; margin-top: 40px; font-size: 10px; color: #333; text-decoration: none; border-bottom: 2px solid #333; }
     </style>
 </head>
 <body>
-    <div class="cheerleader pos-left">
-        <div class="pompom left"></div>
-        <div class="pompom right"></div>
-    </div>
-    <div class="cheerleader pos-right">
-        <div class="pompom left"></div>
-        <div class="pompom right"></div>
-    </div>
+    <audio id="bgm" src="https://ia800504.us.archive.org/33/items/TetrisThemeMusic/Tetris.mp3" loop></audio>
+    <button id="bgm-btn" class="bgm-btn" onclick="toggleBgm()">🎵 BGM 재생</button>
+
+    <div class="cheerleader pos-left"><div class="pompom left"></div><div class="pompom right"></div></div>
+    <div class="cheerleader pos-right"><div class="pompom left"></div><div class="pompom right"></div></div>
 
     <div class="game-container">
         <h1>LEVEL 1</h1>
@@ -121,20 +107,37 @@
         <div id="timer">0.00s</div>
         <h2 id="res"></h2>
         
-        <a href="index.html" class="btn-back">🔙 로비로 돌아가기</a>
+        <button class="btn-toggle" id="btn-toggle" onclick="toggleText()" disabled>👁️ 제시어 가리기</button>
+        
+        <br><a href="index.html" class="btn-back">🔙 로비로 돌아가기</a>
     </div>
 
     <script>
-        const v = ["만세 하기", "박수 치기", "주머니에 손넣기", "점프하기", "허공에 주먹질하기", "머리 긁기","따봉 하기"];
+        const v = ["신발 조용히 벗기", "바닥에 눕기", "의자에서 기지개 켜기", "눈 감고 10초 명상하기", "허공에 주먹질하기", "소리 없이 박수 한 번 치기"];
         let timerInterval = null;
         let startTime = 0;
+        let isTextHidden = false;
+
+        const bgm = document.getElementById('bgm');
+        bgm.volume = 0.3;
+
+        function toggleBgm() {
+            if (bgm.paused) { bgm.play(); document.getElementById('bgm-btn').innerText = "🔇 BGM 정지"; } 
+            else { bgm.pause(); document.getElementById('bgm-btn').innerText = "🎵 BGM 재생"; }
+        }
 
         function draw() {
             document.getElementById('res').innerText = v[Math.floor(Math.random() * v.length)];
-            document.getElementById('res').style.color = "#000";
+            
+            // 텍스트 보이기 상태로 초기화
+            isTextHidden = false;
+            document.getElementById('res').style.opacity = "1";
+            document.getElementById('btn-toggle').innerText = "👁️ 제시어 가리기";
+            document.getElementById('btn-toggle').disabled = false; // 뽑은 후 가리기 버튼 활성화
 
             clearInterval(timerInterval);
             document.getElementById('timer').style.color = "#000";
+            document.getElementById('res').style.color = "#000";
             document.getElementById('btn-success').disabled = false;
             
             startTime = Date.now();
@@ -151,6 +154,21 @@
                 document.getElementById('timer').style.color = "var(--pixel-green)";
                 document.getElementById('res').style.color = "var(--pixel-green)";
                 document.getElementById('btn-success').disabled = true;
+            }
+        }
+
+        // 제시어 가리기/보이기 함수
+        function toggleText() {
+            const resObj = document.getElementById('res');
+            const toggleBtn = document.getElementById('btn-toggle');
+            
+            isTextHidden = !isTextHidden;
+            if (isTextHidden) {
+                resObj.style.opacity = "0"; // 텍스트 투명화
+                toggleBtn.innerText = "👀 제시어 보이기";
+            } else {
+                resObj.style.opacity = "1"; // 텍스트 복구
+                toggleBtn.innerText = "👁️ 제시어 가리기";
             }
         }
     </script>
